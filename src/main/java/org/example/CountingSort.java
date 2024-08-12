@@ -26,5 +26,11 @@ public class CountingSort {
         return new String(output);
     }
 
+    public static void main(String[] args) {
+        String arr = "geeksforgeeks";
+        String sortedArr = countSort(arr);
+
+    }
+
 }
 
