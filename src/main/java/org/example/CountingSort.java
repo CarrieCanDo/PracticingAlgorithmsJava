@@ -1,36 +1,31 @@
 package org.example;
 
+
 public class CountingSort {
     public static String countSort(String arr) {
-        int n = arr.length();
-        int[] count = new int[26]; // Letters in alphabet
-        char[] output = new char[n];
+        // Create a count array to store the count of each character
+        int[] count = new int[26];
 
-        // Step 1: Count the frequency of each character
-        for (int i = 0; i < n; i++) {
-            count[arr.charAt(i) - 'a']++;
+        // Count the occurrences of each character in the input string
+        for (char c : arr.toCharArray()) {
+            count[c - 'a']++;
         }
 
-        // Step 2: Modify the count array to accumulate positions
-        for (int i = 1; i < 26; i++) {
-            count[i] += count[i - 1];
+        // Build the sorted string using the count array
+        StringBuilder sortedString = new StringBuilder();
+        for (int i = 0; i < 26; i++) {
+            while (count[i] > 0) {
+                sortedString.append((char) (i + 'a'));
+                count[i]--;
+            }
         }
 
-        // Step 3: Build the output character array
-        for (int i = n - 1; i >= 0; i--) {
-            output[count[arr.charAt(i) - 'a'] - 1] = arr.charAt(i);
-            count[arr.charAt(i) - 'a']--;
-        }
-
-        // Step 4: Convert the output array to a string and return it
-        return new String(output);
+        return sortedString.toString();
     }
 
     public static void main(String[] args) {
-        String arr = "geeksforgeeks";
-        String sortedArr = countSort(arr);
-
+        // Test cases
+        System.out.println(countSort("edsab")); // Output: abdes
+        System.out.println(countSort("geeksforgeeks")); // Output: eeeefggkkorss
     }
-
 }
-
